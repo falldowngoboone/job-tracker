@@ -1,0 +1,65 @@
+<head>
+    <style>
+        .late,.alert { color:red; }
+        .alert,.need,.note,.done,.collected { font-weight:bold;  }
+        .banner { color:white; background-color:firebrick; padding:10px; }
+        .section { margin-bottom:50px; }
+        .client { margin-bottom: 35px; }
+        .note,.collected { margin-bottom: 35px; }
+
+    </style>
+</head>
+<body style="font-family:'Lucida Grande'">
+
+    <div class="section">
+
+        <h2 class="banner">Working on Today, <span id="current-date"></span></h2>
+
+        <div class="client">
+            <h3>[client.name]</h3>
+            <ul>
+                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
+            </ul>
+        </div>
+
+        <div class="client">
+            <h3>[client.name]</h3>
+            <ul>
+                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2 class="banner">Hotsheet</h2>
+
+        <div class="client">
+            <h3>[client.name]</h3>
+            <ul>
+                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
+            </ul>
+        </div>
+
+        <div class="client">
+            <h3>[client.name]</h3>
+            <ul>
+                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <br><br><br><br><br>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+
+        // Sets the current date
+        var d = new Date();
+        var date = document.getElementById("current-date");
+        date.innerHTML = d.toDateString();
+
+    </script>
+</body>
