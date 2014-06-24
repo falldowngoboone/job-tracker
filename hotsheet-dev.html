@@ -11,44 +11,32 @@
 </head>
 <body style="font-family:'Lucida Grande'">
 
-    <div class="section">
+    <div class="section today">
 
         <h2 class="banner">Working on Today, <span id="current-date"></span></h2>
 
         <div class="client">
-            <h3>[client.name]</h3>
+            <h3>client[i].name</h3>
             <ul>
-                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
-            </ul>
-        </div>
-
-        <div class="client">
-            <h3>[client.name]</h3>
-            <ul>
-                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
+                <li>(client[i].today[i].message)client[i].today[i].status</li>
             </ul>
         </div>
 
     </div>
 
 
-    <div class="section">
+    <div class="section hotsheet">
 
         <h2 class="banner">Hotsheet</h2>
 
         <div class="client">
-            <h3>[client.name]</h3>
+            <h3>client[i].name</h3>
             <ul>
-                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
+                <li>(client[i].project[i].name &ndash; (client[i].project[i].task[i].message)client[i].project[i].task[i].status (ATV client[i].project[i].atv) <span class="alert">client[i].project[i].job-jacket</span>)client[i].project[i].status</li>
             </ul>
         </div>
 
-        <div class="client">
-            <h3>[client.name]</h3>
-            <ul>
-                <li>([project.name] &ndash; ([task.message])task.status, ([task.message])task.status (ATV [project.atv]) <span class="alert">project.job-jacket</span>)[project.status]</li>
-            </ul>
-        </div>
+        <p class="alert">Next meeting: client[i].meeting</p>
 
     </div>
 
