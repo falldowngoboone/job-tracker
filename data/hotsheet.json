@@ -1,0 +1,51 @@
+{
+    "currentDay":"6/30",
+    "accounts":[
+    {
+        "name":"JOM",
+        "today":[
+        {
+            "item":"August MEL – collect today",
+            "status":"normal"
+        },
+        {
+            "item":"September 2 – finish building out",
+            "status":"normal"
+        },
+        {
+            "item":"The Power of Your Dream – need cover pick to build out booklet",
+            "status":"need"
+        }],
+        "projects":[
+        {
+            "name":"Special Project",
+            "tasks":[
+            {
+                "item":"This is a task",
+                "due":"6/15",
+                "status":"late"
+            },
+            {
+                "item":"I need this thing",
+                "due":"6/20",
+                "status":"need"
+            }],
+            "atv":"6/30",
+            "jof":false,
+            "status":"normal"
+        }],
+        "meeting":{
+            "date":"7/15-7/16",
+            "jof":false,
+            "status":"normal"
+        }
+    },
+    {
+        "name":"Christine Caine",
+        "today":[
+        {
+            "item":"July FTF – build",
+            "status":"normal"
+        }]
+    }]
+}
