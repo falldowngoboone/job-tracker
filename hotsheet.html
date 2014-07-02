@@ -41,7 +41,7 @@
 
             <h3>{{name}}</h3>
             <ul>
-                {{#projects}}<li class="{{status}}">{{name}} &ndash; {{#tasks}}<span class="{{status}}">{{item}} ({{due}}),</span> {{/tasks}} (ATV {{atv}}) {{^jof}}<span class="alert">need JOF</span>{{/jof}}</li>{{/projects}}
+                {{#projects}}<li class="{{status}}">{{name}} &ndash; {{#tasks}}<span class="{{status}}">{{item}}{{#if due}} ({{due}}){{/if}}</span>, {{/tasks}} (ATV {{atv}}) {{^jof}}<span class="alert">need JOF</span>{{/jof}}</li>{{/projects}}
                 {{^projects}}<li>Currently no projects scheduled</li>{{/projects}}
             </ul>
 
