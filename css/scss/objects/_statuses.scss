@@ -1,0 +1,16 @@
+.late,
+.alert {
+    color: $error;
+}
+
+.alert,
+.need,
+.note,
+.done,
+.collected {
+    font-weight:bold;
+}
+
+.collected {
+    margin-bottom: $space-double;
+}

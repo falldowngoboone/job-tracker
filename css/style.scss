@@ -1,0 +1,91 @@
+/*------------------------------------*\
+    $TABLE OF CONTENTS
+    based generally on Harry Roberts excellent CSS Guidelines https://github.com/csswizardry/CSS-Guidelines
+\*------------------------------------*/
+/**
+ * VARIABLES..............................Declarations of Sass variables
+ * .....Colors
+ * .....Typography
+ * .....Layout
+ * .....Defaults
+ * .....Breakpoints
+ * MIXINS.................................Sass mixins
+ * RESET..................................Set reset defaults
+ * GLOBAL ELEMENTS........................Establish global styles
+ * .....Global classes
+ * .....Main
+ * .....Links
+ * .....Headings
+ * .....Text-related elements (p, blockquote, lists)
+ * .....Lists
+ * .....Forms
+ * .....Tables
+ * LAYOUT
+ * PAGE STRUCTURE
+ * OBJECT TEXT STYLES
+ * COMPONENTS
+ * .....Statuses
+ */
+
+@import "scss/generic/variables";
+@import "scss/generic/mixins";
+@import "scss/generic/reset";
+
+
+
+
+/*------------------------------------*\
+    $GLOBAL ELEMENTS
+\*------------------------------------*/
+@import "scss/base/global-classes";
+@import "scss/base/main";
+@import "scss/base/links";
+@import "scss/base/headings";
+@import "scss/base/text";
+@import "scss/base/lists";
+@import "scss/base/forms";
+@import "scss/base/tables";
+
+
+
+
+/*------------------------------------*\
+    $LAYOUT
+\*------------------------------------*/
+@import "scss/objects/layout";
+
+
+
+
+/*------------------------------------*\
+    $PAGE STRUCTURE
+\*------------------------------------*/
+
+
+
+
+
+/*------------------------------------*\
+    $OBJECT TEXT STYLES
+\*------------------------------------*/
+
+
+
+
+
+/*------------------------------------*\
+    $COMPONENTS
+\*------------------------------------*/
+@import "scss/objects/statuses";
+
+
+
+.banner {
+    color:white; background-color:firebrick; padding:10px;
+}
+.section {
+    margin-bottom:50px;
+}
+.client {
+    margin-bottom: 35px;
+}
