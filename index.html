@@ -1,0 +1,73 @@
+<head>
+    <style>
+        .late,.alert { color:red; }
+        .alert,.need,.note,.done,.collected { font-weight:bold;  }
+        .banner { color:white; background-color:firebrick; padding:10px; }
+        .section { margin-bottom:50px; }
+        .client { margin-bottom: 35px; }
+        .note,.collected { margin-bottom: 35px; }
+
+    </style>
+</head>
+<body style="font-family:'Lucida Grande'; line-height:1.4;">
+<div id="hotsheet">
+<script id="hotsheet-template" type="text/x-handlebars-template">
+
+    <div class="section">
+
+        <h2 class="banner">Working on Today, {{currentDay}}</h2>
+
+        {{#accounts}}
+        {{#if today}}
+        <div class="client">
+
+            <h3>{{name}}</h3>
+            <ul>
+                {{#today}}<li class="{{status}}">{{item}}</li>{{/today}}
+            </ul>
+
+        </div>
+        {{/if}}
+        {{/accounts}}
+
+    </div>
+
+
+    <div class="section">
+
+        <h2 class="banner">Hotsheet</h2>
+
+        {{#accounts}}
+        <div class="client">
+
+            <h3>{{name}}</h3>
+            <ul>
+                {{#projects}}<li class="{{status}}">{{name}} &ndash; {{#tasks}}<span class="{{status}}">{{item}}{{#if due}} ({{due}}){{/if}}</span>, {{/tasks}} {{#if atv}}(ATV {{atv}}) {{/if}}{{^jof}}<span class="alert">need JOF</span>{{/jof}}</li>{{/projects}}
+                {{^projects}}<li>Currently no projects scheduled</li>{{/projects}}
+            </ul>
+
+            {{#meeting}}<p class="{{status}}">Next {{name}} Meeting: {{date}} {{^jof}}<span class="alert">need JOF</span>{{/jof}}</p>
+            {{#if boards}}
+                <ul>
+                    {{#boards}}<li class="{{status}}">{{board}}</li>{{/boards}}
+                </ul>
+            {{/if}}
+            {{/meeting}}
+            {{^meeting}}{{/meeting}}
+
+        </div>
+        {{/accounts}}
+
+    </div>
+
+    <br><br><br><br><br>
+
+</script>
+</div>
+
+    <script src="js/vendor/jquery-2.1.1.min.js"></script>
+    <script src="js/vendor/handlebars-v1.3.0.js"></script>
+    <script src="js/hotsheet.js"></script>
+
+
+</body>
