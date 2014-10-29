@@ -1,6 +1,5 @@
 data/**
 RESOURCES/**
-config.codekit
 **.sass-cache
 **.css
 js/min/*
