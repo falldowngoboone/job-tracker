@@ -1,72 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="hotsheet">
 <head>
-    <meta charset="UTF-8">
-    <title>Ryan's Hotsheet</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Ryan's Hotsheet</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="hotsheet">
-        <script id="hotsheet-template" type="text/x-handlebars-template">
+  <div id="hotsheet" ng-controller="hotsheetCtrl">
 
-            <div class="section">
+    <div class="section">
 
-                <h2 class="banner">Working on Today, {{currentDay}}</h2>
+      <h2 class="banner">Working on Today, {{date}}</h2>
 
-                {{#accounts}}
-                {{#if today}}
-                <div class="client">
+      <div class="client" ng-repeat="client in clients">
 
-                    <h3>{{name}}</h3>
-                    <ul>
-                        {{#today}}<li class="{{status}}">{{item}}</li>{{/today}}
-                    </ul>
+        <h3>{{client.name}}</h3>
+        <ul>
+          <li class="{{job.status}}" ng-repeat="job in client.today">{{job.item}}</li>
+        </ul>
 
-                </div>
-                {{/if}}
-                {{/accounts}}
+      </div>
 
-            </div>
-
-
-            <div class="section">
-
-                <h2 class="banner">Hotsheet</h2>
-
-                {{#accounts}}
-                <div class="client">
-
-                    <h3>{{name}}</h3>
-                    <ul>
-                        {{#projects}}
-                        <li class="{{status}}">{{name}} &ndash;
-                        {{#tasks}}<span class="{{status}}">{{item}}{{#if due}} ({{due}}){{/if}}{{#unless @last}},{{/unless}}</span>
-                        {{/tasks}} {{#if atv}}(ATV {{atv}}) {{/if}}{{^jof}}<span class="alert">need JOF</span>{{/jof}}</li>{{/projects}}
-                        {{^projects}}<li>Currently no projects scheduled</li>{{/projects}}
-                    </ul>
-
-                    {{#meeting}}<p class="{{status}}">Next {{name}} Meeting: {{date}} {{^jof}}<span class="alert">need JOF</span>{{/jof}}</p>
-                    {{#if boards}}
-                        <ul>
-                            {{#boards}}<li class="{{status}}">{{board}}</li>{{/boards}}
-                        </ul>
-                    {{/if}}
-                    {{/meeting}}
-
-                </div>
-                {{/accounts}}
-
-            </div>
-
-            <br><br><br><br><br>
-
-        </script>
     </div>
 
-    <script src="js/vendor/jquery-2.1.1.min.js"></script>
-    <script src="js/vendor/handlebars-v1.3.0.js"></script>
-    <script src="js/hotsheet.js"></script>
 
+    <div class="section">
+
+      <h2 class="banner">Hotsheet</h2>
+
+      <div class="client" ng-repeat="client in clients">
+
+        <h3>{{client.name}}</h3>
+        <ul>
+          <li class="{{project.status}}" ng-repeat="project in client.projects">
+            {{project.name}} &ndash;
+            <span class="{{task.status}}" ng-repeat="task in project.tasks">
+              {{task.item}}<span ng-show="task.due"> ({{task.due}})</span>,
+            </span>
+            (ATV {{project.atv}})
+            <span class="alert" ng-hide="project.jof">
+              need JOF
+            </span>
+          </li>
+        </ul>
+
+        <div class="meeting">
+          <p class="{{client.meeting.status}}">
+            Next {{client.name}} Meeting: {{client.meeting.date}}
+            <span class="alert" ng-hide="client.meeting.jof">
+              need JOF
+            </span>
+          </p>
+          <ul>
+            <li class="{{board.status}}" ng-repeat="board in client.meeting.boards">
+              {{board.board}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <br><br><br><br><br>
+  </div>
+
+  <script src="js/vendor/angular/angular.min.js"></script>
+  <script src="js/ng-hotsheet.js"></script>
 
 </body>
 </html>
