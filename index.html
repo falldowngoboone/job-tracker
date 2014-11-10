@@ -10,13 +10,15 @@
 
     <div class="section">
 
-      <h2 class="banner">Working on Today, {{date}}</h2>
+      <h2 class="banner">Working on Today, {{date}} <span>+</span></h2>
+
+
 
       <div class="client" ng-repeat="client in clients">
 
         <h3>
-          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.today.unshift({item:'new'})">+</span>
-          <form ng-submit="toggleEdit(client" ng-show="client.edit">
+          <span ng-click="toggleEdit(client.today)">{{client.name}}</span> <span ng-click="client.today.unshift({item:'new'})" ng-show="client.today.edit">+</span>
+          <form ng-submit="toggleEdit(client.today)" ng-show="client.today.edit">
             <input type="text" ng-model="client.name">
           </form>
         </h3>
@@ -48,7 +50,7 @@
       <div class="client" ng-repeat="client in clients">
 
         <h3>
-          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.projects.unshift({name:'new'})">+</span>
+          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.projects.unshift({name:'new'})" ng-show="client.edit">+</span>
           <form ng-submit="toggleEdit(client)" ng-show="client.edit">
             <input type="text" ng-model="client.name">
           </form>
