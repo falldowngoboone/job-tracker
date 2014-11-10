@@ -14,12 +14,24 @@
 
       <div class="client" ng-repeat="client in clients">
 
-        <h3>{{client.name}}</h3>
+        <h3>
+          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.today.unshift({item:'new'})">+</span>
+          <form ng-submit="toggleEdit(client" ng-show="client.edit">
+            <input type="text" ng-model="client.name">
+          </form>
+        </h3>
         <ul>
           <li class="{{job.status}}" ng-repeat="job in client.today">
-            <span ng-click="edit(job)">{{job.item}}</span>
-            <form ng-submit="save(job)" ng-show="job.edit">
+            <span ng-click="toggleEdit(job)">{{job.item}}</span>
+            <form ng-submit="toggleEdit(job)" ng-show="job.edit">
               <input type="text" ng-model="job.item">
+              <select type="text" ng-model="job.status">
+                <option value="normal">normal</option>
+                <option value="need">need</option>
+                <option value="late">late</option>
+                <option value="alert">alert</option>
+              </select>
+
             </form>
           </li>
         </ul>
@@ -35,7 +47,12 @@
 
       <div class="client" ng-repeat="client in clients">
 
-        <h3>{{client.name}}</h3>
+        <h3>
+          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.projects.unshift({name:'new'})">+</span>
+          <form ng-submit="toggleEdit(client)" ng-show="client.edit">
+            <input type="text" ng-model="client.name">
+          </form>
+        </h3>
         <ul>
           <li class="{{project.status}}" ng-repeat="project in client.projects">
             {{project.name}} &ndash;
