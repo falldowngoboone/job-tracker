@@ -10,14 +10,14 @@
 
     <div class="section">
 
-      <h2 class="banner">Working on Today, {{date}} <span>+</span></h2>
+      <h2 class="banner"><span ng-model="todayJobs.edit" ng-click="todayJobs.edit=!todayJobs.edit">Working on Today, {{date}}</span> <span ng-show="todayJobs.edit" ng-click="clients.push({name:'New Client',projects:[],today:[]})">+</span></h2>
 
 
 
       <div class="client" ng-repeat="client in clients">
 
         <h3>
-          <span ng-click="toggleEdit(client.today)">{{client.name}}</span> <span ng-click="client.today.unshift({item:'new'})" ng-show="client.today.edit">+</span>
+          <span ng-click="toggleEdit(client.today)">{{client.name}}</span> <span ng-click="addToday(client)" ng-show="client.today.edit">+</span> <span ng-click="deleteClient(client)" ng-show="client.today.edit">-</span>
           <form ng-submit="toggleEdit(client.today)" ng-show="client.today.edit">
             <input type="text" ng-model="client.name">
           </form>
@@ -25,7 +25,7 @@
         <ul>
           <li class="{{job.status}}" ng-repeat="job in client.today">
             <span ng-click="toggleEdit(job)">{{job.item}}</span>
-            <form ng-submit="toggleEdit(job)" ng-show="job.edit">
+            <form name="form" ng-submit="toggleEdit(job)" ng-show="job.edit">
               <input type="text" ng-model="job.item">
               <select type="text" ng-model="job.status">
                 <option value="normal">normal</option>
@@ -45,12 +45,12 @@
 
     <div class="section">
 
-      <h2 class="banner">Hotsheet</h2>
+      <h2 class="banner"><span ng-model="todayJobs.edit" ng-click="hotsheetJobs.edit=!hotsheetJobs.edit">Hotsheet</span> <span ng-show="hotsheetJobs.edit" ng-click="clients.push({name:'New Client',projects:[],today:[]})">+</span></h2>
 
       <div class="client" ng-repeat="client in clients">
 
         <h3>
-          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.projects.unshift({name:'new'})" ng-show="client.edit">+</span>
+          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.projects.unshift({name:'new'})" ng-show="client.edit">+</span> <span ng-click="deleteClient(client)" ng-show="client.edit">-</span>
           <form ng-submit="toggleEdit(client)" ng-show="client.edit">
             <input type="text" ng-model="client.name">
           </form>
