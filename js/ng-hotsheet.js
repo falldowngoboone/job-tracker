@@ -20,6 +20,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
 
   $scope.addToday = function(client) {
     client.today.unshift({item:'new'});
+    $scope.toggleEdit(client.today);
   };
   $scope.deleteToday = function(job, client) {
     if ($window.confirm("Delete Today item?")) {
@@ -72,6 +73,10 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
     if (!client.meeting) {
       client.meeting = {date:"???"};
     }
+    $scope.toggleEdit(client);
+  };
+  $scope.deleteMeeting = function(client) {
+    delete client.meeting;
   };
 
 }]);

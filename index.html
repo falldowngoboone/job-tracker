@@ -18,29 +18,33 @@
 
         <h3>
           <span ng-click="toggleEdit(client.today)">{{client.name}}</span>
+
           <form ng-submit="toggleEdit(client.today)" ng-show="client.today.edit">
             <input type="text" ng-model="client.name">
             <span ng-click="addToday(client)">Add New Item</span> |
-            <span ng-click="addMeeting(client)">Add New Meeting</span> |
             <span ng-click="deleteClient(client)">Delete {{client.name}}</span>
           </form>
+
         </h3>
+
         <ul>
-          <li class="{{job.status}}" ng-repeat-start="job in client.today">
-            <span ng-click="toggleEdit(job)">{{job.item}}</span>
+          <li class="{{today.status}}" ng-repeat-start="today in client.today">
+            <span ng-click="toggleEdit(today)">{{today.item}}</span>
           </li>
-          <form name="form" ng-submit="toggleEdit(job)" ng-show="job.edit" ng-repeat-end>
-            <input type="text" ng-model="job.item">
-            <select type="text" ng-model="job.status">
+
+          <form name="form" ng-submit="toggleEdit(today)" ng-show="today.edit" ng-repeat-end>
+            <input type="text" ng-model="today.item">
+            <select type="text" ng-model="today.status">
               <option value="normal">normal</option>
               <option value="need">need</option>
               <option value="late">late</option>
               <option value="alert">alert</option>
             </select>
-            <span ng-click="deleteToday(job, client)">Delete</span><br>
+            <span ng-click="deleteToday(today, client)">Delete</span><br>
             <input type="submit" value="Done">
 
           </form>
+
         </ul>
 
       </div>
@@ -74,6 +78,7 @@
               need JOF
             </span>
           </li>
+
           <form name="form" ng-submit="toggleEdit(project)" ng-show="project.edit" ng-repeat-end>
             <strong ng-click="toggleEdit(project)">{{project.name}}</strong> |
             <span ng-click="project.tasks.unshift({item:'New task'})">Add Task</span> |
@@ -87,8 +92,8 @@
               <option value="collected">collected</option>
             </select>
             <input type="text" ng-model="project.atv">
-            <input type="checkbox" ng-model="project.jof" id="jof">
-            <label for="job">JOF</label> <br>
+            <input type="checkbox" ng-model="project.jof" id="jof-{{$index}}">
+            <label for="jof-{{$index}}">JOF</label> <br>
             <strong ng-click="toggleEdit(project)">Tasks:</strong><br>
             <input type="text" ng-repeat-start="task in project.tasks | orderBy:['-!due', 'due']" ng-model="task.item">
             <select type="text" ng-model="task.status">
@@ -100,12 +105,12 @@
             <input type="text" ng-model="task.due">
             <span ng-click="deleteTask(task, project, client)">Delete Task</span><br ng-repeat-end>
             <input type="submit" value="Done">
-
           </form>
+
         </ul>
 
         <div ng-show="client.meeting" class="meeting">
-          <p class="{{client.meeting.status}}">
+          <p class="{{client.meeting.status}}" ng-click="toggleEdit(client.meeting)">
             Next {{client.name}} Meeting: {{client.meeting.date}}
             <span class="alert" ng-hide="client.meeting.jof">
               need JOF
@@ -116,6 +121,18 @@
               {{board.board}}
             </li>
           </ul>
+          <form ng-submit="toggleEdit(client.meeting)" ng-show="client.meeting.edit">
+            <label for="meeting-date">Date</label> <input type="text" ng-model="client.meeting.date" id="meeting-date">
+            <select type="text" ng-model="client.meeting.status">
+              <option value="normal">normal</option>
+              <option value="need">need</option>
+              <option value="late">late</option>
+              <option value="alert">alert</option>
+            </select>
+            <input type="checkbox" ng-model="client.meeting.jof" id="meeting-jof"> <label for="meeting-jof">JOF</label> |
+            <span ng-click="deleteMeeting(client)">Delete Meeting</span> <br>
+            <input type="submit" value="Done">
+          </form>
         </div>
 
       </div>
