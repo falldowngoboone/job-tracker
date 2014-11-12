@@ -110,19 +110,19 @@
         </ul>
 
         <div ng-show="client.meeting" class="meeting">
-          <p class="{{client.meeting.status}}" ng-click="toggleEdit(client.meeting)">
+          <p class="{{client.meeting.status}}" ng-click="toggleEdit(client.meeting)" ng-show="!client.meeting.edit">
             Next {{client.name}} Meeting: {{client.meeting.date}}
             <span class="alert" ng-hide="client.meeting.jof">
               need JOF
             </span>
           </p>
-          <ul ng-show="client.meeting.boards">
+          <ul ng-show="client.meeting.boards && !client.meeting.edit">
             <li class="{{board.status}}" ng-repeat="board in client.meeting.boards">
               {{board.board}}
             </li>
           </ul>
           <form ng-submit="toggleEdit(client.meeting)" ng-show="client.meeting.edit">
-            <label for="meeting-date">Date</label> <input type="text" ng-model="client.meeting.date" id="meeting-date">
+            <label ng-click="toggleEdit(client.meeting)">Next {{client.name}} meeting:</label> <input type="text" ng-model="client.meeting.date" id="meeting-date">
             <select type="text" ng-model="client.meeting.status">
               <option value="normal">normal</option>
               <option value="need">need</option>
@@ -130,7 +130,15 @@
               <option value="alert">alert</option>
             </select>
             <input type="checkbox" ng-model="client.meeting.jof" id="meeting-jof"> <label for="meeting-jof">JOF</label> |
+            <span ng-click="addBoard(client)">Add Board</span> |
             <span ng-click="deleteMeeting(client)">Delete Meeting</span> <br>
+            <input type="text" ng-repeat-start="board in client.meeting.boards" ng-model="board.board">
+            <select type="text" ng-model="board.status">
+              <option value="normal">normal</option>
+              <option value="need">need</option>
+              <option value="late">late</option>
+              <option value="alert">alert</option>
+            </select> <br ng-repeat-end>
             <input type="submit" value="Done">
           </form>
         </div>

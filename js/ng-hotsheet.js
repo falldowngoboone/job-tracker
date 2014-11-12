@@ -79,4 +79,11 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
     delete client.meeting;
   };
 
+  $scope.addBoard = function(client) {
+    if (!client.meeting.boards) {
+      client.meeting.boards = [];
+    }
+    client.meeting.boards.push({board:"New board"});
+  };
+
 }]);
