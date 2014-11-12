@@ -31,6 +31,31 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
     }
   };
 
+  $scope.addProject = function(client) {
+    client.projects.unshift({name:'new'});
+    $scope.toggleEdit(client);
+  };
+  $scope.deleteProject = function(project, client) {
+    if ($window.confirm("Delete Project?")) {
+      var clientIndex = $scope.clients.indexOf(client);
+      var projectIndex = $scope.clients[clientIndex].projects.indexOf(project);
+
+      $scope.clients[clientIndex].projects.splice(projectIndex, 1);
+
+    }
+  };
+
+  $scope.deleteTask = function(task, project, client) {
+    if ($window.confirm("Delete Task?")) {
+      var clientIndex = $scope.clients.indexOf(client);
+      var projectIndex = $scope.clients[clientIndex].projects.indexOf(project);
+      var taskIndex = $scope.clients[clientIndex].projects[projectIndex].tasks.indexOf(task);
+
+      $scope.clients[clientIndex].projects[projectIndex].tasks.splice(taskIndex, 1);
+
+    }
+  };
+
   $scope.deleteClient = function(client) {
     if ($window.confirm("Delete Client?")) {
       var oldArr = $scope.clients;
@@ -40,6 +65,12 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
           $scope.clients.push(el);
         }
       });
+    }
+  };
+
+  $scope.addMeeting = function(client) {
+    if (!client.meeting) {
+      client.meeting = {date:"???"};
     }
   };
 

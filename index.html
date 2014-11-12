@@ -17,26 +17,30 @@
       <div class="client" ng-repeat="client in clients">
 
         <h3>
-          <span ng-click="toggleEdit(client.today)">{{client.name}}</span> <span ng-click="addToday(client)" ng-show="client.today.edit">+</span> <span ng-click="deleteClient(client)" ng-show="client.today.edit">-</span>
+          <span ng-click="toggleEdit(client.today)">{{client.name}}</span>
           <form ng-submit="toggleEdit(client.today)" ng-show="client.today.edit">
             <input type="text" ng-model="client.name">
+            <span ng-click="addToday(client)">Add New Item</span> |
+            <span ng-click="addMeeting(client)">Add New Meeting</span> |
+            <span ng-click="deleteClient(client)">Delete {{client.name}}</span>
           </form>
         </h3>
         <ul>
-          <li class="{{job.status}}" ng-repeat="job in client.today">
+          <li class="{{job.status}}" ng-repeat-start="job in client.today">
             <span ng-click="toggleEdit(job)">{{job.item}}</span>
-            <form name="form" ng-submit="toggleEdit(job)" ng-show="job.edit">
-              <input type="text" ng-model="job.item">
-              <select type="text" ng-model="job.status">
-                <option value="normal">normal</option>
-                <option value="need">need</option>
-                <option value="late">late</option>
-                <option value="alert">alert</option>
-              </select>
-              <span ng-click="deleteToday(job, client)">Delete</span>
-
-            </form>
           </li>
+          <form name="form" ng-submit="toggleEdit(job)" ng-show="job.edit" ng-repeat-end>
+            <input type="text" ng-model="job.item">
+            <select type="text" ng-model="job.status">
+              <option value="normal">normal</option>
+              <option value="need">need</option>
+              <option value="late">late</option>
+              <option value="alert">alert</option>
+            </select>
+            <span ng-click="deleteToday(job, client)">Delete</span><br>
+            <input type="submit" value="Done">
+
+          </form>
         </ul>
 
       </div>
@@ -51,15 +55,18 @@
       <div class="client" ng-repeat="client in clients">
 
         <h3>
-          <span ng-click="toggleEdit(client)">{{client.name}}</span> <span ng-click="client.projects.unshift({name:'new'})" ng-show="client.edit">+</span> <span ng-click="deleteClient(client)" ng-show="client.edit">-</span>
+          <span ng-click="toggleEdit(client)">{{client.name}}</span>
           <form ng-submit="toggleEdit(client)" ng-show="client.edit">
             <input type="text" ng-model="client.name">
+            <span ng-click="addProject(client)">Add New Project</span> |
+            <span ng-click="addMeeting(client)">Add New Meeting</span> |
+            <span ng-click="deleteClient(client)">Delete {{client.name}}</span>
           </form>
         </h3>
         <ul>
-          <li class="{{project.status}}" ng-repeat="project in client.projects">
+          <li class="{{project.status}}" ng-repeat-start="project in client.projects | orderBy:['-!atv', 'atv']" ng-click="toggleEdit(project)" ng-show="!project.edit">
             {{project.name}} &ndash;
-            <span class="{{task.status}}" ng-repeat="task in project.tasks">
+            <span class="{{task.status}}" ng-repeat="task in project.tasks | orderBy:['-!due', 'due']">
               {{task.item}}<span ng-show="task.due"> ({{task.due}})</span><span ng-show="!$last">,</span>
             </span>
             <span ng-show="project.atv">(ATV {{project.atv}})</span>
@@ -67,6 +74,34 @@
               need JOF
             </span>
           </li>
+          <form name="form" ng-submit="toggleEdit(project)" ng-show="project.edit" ng-repeat-end>
+            <strong ng-click="toggleEdit(project)">{{project.name}}</strong> |
+            <span ng-click="project.tasks.unshift({item:'New task'})">Add Task</span> |
+            <span ng-click="deleteProject(project, client)">Delete Project</span><br>
+            <input type="text" ng-model="project.name">
+            <select type="text" ng-model="project.status">
+              <option value="normal">normal</option>
+              <option value="need">need</option>
+              <option value="late">late</option>
+              <option value="alert">alert</option>
+              <option value="collected">collected</option>
+            </select>
+            <input type="text" ng-model="project.atv">
+            <input type="checkbox" ng-model="project.jof" id="jof">
+            <label for="job">JOF</label> <br>
+            <strong ng-click="toggleEdit(project)">Tasks:</strong><br>
+            <input type="text" ng-repeat-start="task in project.tasks | orderBy:['-!due', 'due']" ng-model="task.item">
+            <select type="text" ng-model="task.status">
+              <option value="normal">normal</option>
+              <option value="need">need</option>
+              <option value="late">late</option>
+              <option value="alert">alert</option>
+            </select>
+            <input type="text" ng-model="task.due">
+            <span ng-click="deleteTask(task, project, client)">Delete Task</span><br ng-repeat-end>
+            <input type="submit" value="Done">
+
+          </form>
         </ul>
 
         <div ng-show="client.meeting" class="meeting">
