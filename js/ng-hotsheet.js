@@ -21,6 +21,15 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
   $scope.addToday = function(client) {
     client.today.unshift({item:'new'});
   };
+  $scope.deleteToday = function(job, client) {
+    if ($window.confirm("Delete Today item?")) {
+      var clientIndex = $scope.clients.indexOf(client);
+      var jobIndex = $scope.clients[clientIndex].today.indexOf(job);
+
+      $scope.clients[clientIndex].today.splice(jobIndex, 1);
+
+    }
+  };
 
   $scope.deleteClient = function(client) {
     if ($window.confirm("Delete Client?")) {

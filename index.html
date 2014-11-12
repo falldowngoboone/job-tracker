@@ -33,6 +33,7 @@
                 <option value="late">late</option>
                 <option value="alert">alert</option>
               </select>
+              <span ng-click="deleteToday(job, client)">Delete</span>
 
             </form>
           </li>
@@ -59,23 +60,23 @@
           <li class="{{project.status}}" ng-repeat="project in client.projects">
             {{project.name}} &ndash;
             <span class="{{task.status}}" ng-repeat="task in project.tasks">
-              {{task.item}}<span ng-show="task.due"> ({{task.due}})</span>,
+              {{task.item}}<span ng-show="task.due"> ({{task.due}})</span><span ng-show="!$last">,</span>
             </span>
-            (ATV {{project.atv}})
+            <span ng-show="project.atv">(ATV {{project.atv}})</span>
             <span class="alert" ng-hide="project.jof">
               need JOF
             </span>
           </li>
         </ul>
 
-        <div class="meeting">
+        <div ng-show="client.meeting" class="meeting">
           <p class="{{client.meeting.status}}">
             Next {{client.name}} Meeting: {{client.meeting.date}}
             <span class="alert" ng-hide="client.meeting.jof">
               need JOF
             </span>
           </p>
-          <ul>
+          <ul ng-show="client.meeting.boards">
             <li class="{{board.status}}" ng-repeat="board in client.meeting.boards">
               {{board.board}}
             </li>
