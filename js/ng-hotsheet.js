@@ -2,10 +2,15 @@ var hotsheet = angular.module('hotsheet',[]);
 
 hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
 
-  $http.get('/data/hotsheet.json')
+  $http.get('/data/test.json')
     .success(function(data){
-      $scope.clients = data.accounts;
+      $scope.clients = data;
     });
+
+  $scope.save = function() {
+    var data = JSON.stringify($scope.clients, null, 2);
+    $http.post('/scripts/writeJSON.php', data);
+  };
 
   var date = new Date();
   $scope.date = date.toDateString();
@@ -13,6 +18,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
   $scope.toggleEdit = function(context) {
     if(context.edit) {
       delete context.edit;
+      $scope.save();
     } else {
       context.edit = true;
     }
