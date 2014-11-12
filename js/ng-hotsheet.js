@@ -36,6 +36,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
       $scope.clients[clientIndex].today.splice(jobIndex, 1);
 
     }
+    $scope.save();
   };
 
   $scope.addProject = function(client) {
@@ -50,6 +51,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
       $scope.clients[clientIndex].projects.splice(projectIndex, 1);
 
     }
+    $scope.save();
   };
 
   $scope.deleteTask = function(task, project, client) {
@@ -61,6 +63,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
       $scope.clients[clientIndex].projects[projectIndex].tasks.splice(taskIndex, 1);
 
     }
+    $scope.save();
   };
 
   $scope.deleteClient = function(client) {
@@ -73,6 +76,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
         }
       });
     }
+    $scope.save();
   };
 
   $scope.addMeeting = function(client) {
@@ -83,6 +87,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
   };
   $scope.deleteMeeting = function(client) {
     delete client.meeting;
+    $scope.save();
   };
 
   $scope.addBoard = function(client) {
