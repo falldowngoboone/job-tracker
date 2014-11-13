@@ -12,8 +12,7 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
     $http.post('/scripts/writeJSON.php', data);
   };
 
-  var date = new Date();
-  $scope.date = date.toDateString();
+  $scope.date = new Date();
 
   $scope.toggleEdit = function(context) {
     if(context.edit) {
@@ -54,6 +53,12 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
     $scope.save();
   };
 
+  $scope.addTask = function(project){
+    if(!project.tasks){
+      project.tasks = [];
+    }
+    project.tasks.unshift({item:'New task'});
+  };
   $scope.deleteTask = function(task, project, client) {
     if ($window.confirm("Delete Task?")) {
       var clientIndex = $scope.clients.indexOf(client);

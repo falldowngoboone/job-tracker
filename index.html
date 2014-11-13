@@ -10,7 +10,7 @@
 
     <div class="section">
 
-      <h2 class="banner"><span ng-model="todayJobs.edit" ng-click="todayJobs.edit=!todayJobs.edit">Working on Today, {{date}}</span> <span ng-show="todayJobs.edit" ng-click="clients.push({name:'New Client',projects:[],today:[]})">+</span></h2>
+      <h2 class="banner"><span ng-model="todayJobs.edit" ng-click="todayJobs.edit=!todayJobs.edit">Working on Today, {{date | date:'MM/dd'}}</span> <span ng-show="todayJobs.edit" ng-click="clients.push({name:'New Client',projects:[],today:[]})">+</span></h2>
 
 
 
@@ -68,12 +68,12 @@
           </form>
         </h3>
         <ul>
-          <li class="{{project.status}}" ng-repeat-start="project in client.projects | orderBy:['-!atv', 'atv']" ng-click="toggleEdit(project)" ng-show="!project.edit">
+          <li class="{{project.status}}" ng-repeat-start="project in client.projects | orderBy:['-!atv', 'atv'] track by $index" ng-click="toggleEdit(project)" ng-show="!project.edit">
             {{project.name}} &ndash;
             <span class="{{task.status}}" ng-repeat="task in project.tasks | orderBy:['-!due', 'due']">
-              {{task.item}}<span ng-show="task.due"> ({{task.due}})</span><span ng-show="!$last">,</span>
+              {{task.item}}<span ng-show="task.due"> ({{task.due | date:'MM/dd'}})</span><span ng-show="!$last">,</span>
             </span>
-            <span ng-show="project.atv">(ATV {{project.atv}})</span>
+            <span ng-show="project.atv">(ATV {{project.atv | date:'MM/dd'}})</span>
             <span class="alert" ng-hide="project.jof">
               need JOF
             </span>
@@ -81,7 +81,7 @@
 
           <form name="form" ng-submit="toggleEdit(project)" ng-show="project.edit" ng-repeat-end>
             <strong ng-click="toggleEdit(project)">{{project.name}}</strong> |
-            <span ng-click="project.tasks.unshift({item:'New task'})">Add Task</span> |
+            <span ng-click="addTask(project)">Add Task</span> |
             <span ng-click="deleteProject(project, client)">Delete Project</span><br>
             <input type="text" ng-model="project.name">
             <select type="text" ng-model="project.status">
