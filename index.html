@@ -40,7 +40,7 @@
               <option value="late">late</option>
               <option value="alert">alert</option>
             </select>
-            <span ng-click="deleteToday(today, client)">Delete</span><br>
+            <button type="button" ng-click="deleteToday(today, client)">Delete</button><br>
             <input type="submit" value="Done">
 
           </form>
@@ -80,9 +80,8 @@
           </li>
 
           <form name="form" ng-submit="toggleEdit(project)" ng-show="project.edit" ng-repeat-end>
-            <strong ng-click="toggleEdit(project)">{{project.name}}</strong> |
-            <span ng-click="addTask(project)">Add Task</span> |
-            <span ng-click="deleteProject(project, client)">Delete Project</span><br>
+            <strong ng-click="toggleEdit(project)">{{project.name}}</strong>
+            <button type="button" ng-click="deleteProject(project, client)">Delete Project</button><br>
             <input type="text" ng-model="project.name">
             <select type="text" ng-model="project.status">
               <option value="normal">normal</option>
@@ -103,8 +102,8 @@
               <option value="alert">alert</option>
             </select>
             <input type="text" ng-model="task.due" placeholder="YYYY-MM-DD">
-            <span ng-click="deleteTask(task, project, client)">Delete Task</span><br ng-repeat-end>
-            <input type="submit" value="Done">
+            <button type="button" ng-click="deleteTask(task, project, client)">Delete Task</button><br ng-repeat-end>
+            <button type="button" ng-click="addTask(project)">Add Task</button> <input type="submit" value="Done">
           </form>
 
         </ul>
