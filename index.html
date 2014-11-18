@@ -91,7 +91,7 @@
               <option value="alert">alert</option>
               <option value="collected">collected</option>
             </select>
-            <input type="text" ng-model="project.atv">
+            <input type="text" ng-model="project.atv" placeholder="YYYY-MM-DD">
             <input type="checkbox" ng-model="project.jof" id="jof-{{$index}}">
             <label for="jof-{{$index}}">JOF</label> <br>
             <strong ng-click="toggleEdit(project)">Tasks:</strong><br>
@@ -102,7 +102,7 @@
               <option value="late">late</option>
               <option value="alert">alert</option>
             </select>
-            <input type="text" ng-model="task.due">
+            <input type="text" ng-model="task.due" placeholder="YYYY-MM-DD">
             <span ng-click="deleteTask(task, project, client)">Delete Task</span><br ng-repeat-end>
             <input type="submit" value="Done">
           </form>
