@@ -6,11 +6,7 @@ angular.module('hotsheet',[])
     .success(function(data){
       $scope.clients = data;
     });
-
-  $scope.save = function() {
-    var data = JSON.stringify($scope.clients, null, 2);
-    $http.post('/scripts/writeJSON.php', data);
-  };
+  $scope.save = dataServices.saveJSON($scope.clients);
 
   $scope.date = new Date();
 
@@ -120,6 +116,13 @@ angular.module('hotsheet',[])
 
   dataServices.get = function() {
     return $http.get('/data/test.json');
+  };
+  dataServices.saveJSON = function(clients) {
+    this.clients = clients;
+    return function() {
+      var data = JSON.stringify(this.clients, null, 2);
+      $http.post('/scripts/writeJSON.php', data);
+    };
   };
 
   return dataServices;

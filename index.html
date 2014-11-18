@@ -27,7 +27,7 @@
         </h3>
 
         <ul>
-          <li class="{{today.status}}" ng-repeat-start="today in client.today">
+          <li class="{{today.status}}" ng-repeat-start="today in client.today track by $index">
             <span ng-click="toggleEdit(today)">{{today.item}}</span>
           </li>
 
