@@ -1,6 +1,6 @@
-var hotsheet = angular.module('hotsheet',[]);
+angular.module('hotsheet',[])
 
-hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
+.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
 
   $http.get('/data/test.json')
     .success(function(data){
