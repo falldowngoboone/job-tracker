@@ -23,6 +23,30 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
     }
   };
 
+  $scope.todayJobs = function() {
+    return {edit: false};
+  };
+
+  $scope.hotsheetJobs = function() {
+    return {edit: false};
+  };
+
+  $scope.addClient = function(self) {
+    $scope.clients.push({
+      name:'New Client',
+      projects:[],
+      today:[]
+    });
+    $scope.toggleEdit(self);
+  };
+  $scope.deleteClient = function(client) {
+    if ($window.confirm("Delete Client?")) {
+      var clientIndex = $scope.clients.indexOf(client);
+      $scope.clients.splice(clientIndex, 1);
+    }
+    $scope.save();
+  };
+
   $scope.addToday = function(client) {
     client.today.unshift({item:'new'});
     $scope.toggleEdit(client.today);
@@ -67,19 +91,6 @@ hotsheet.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($sco
 
       $scope.clients[clientIndex].projects[projectIndex].tasks.splice(taskIndex, 1);
 
-    }
-    $scope.save();
-  };
-
-  $scope.deleteClient = function(client) {
-    if ($window.confirm("Delete Client?")) {
-      var oldArr = $scope.clients;
-      $scope.clients = [];
-      oldArr.forEach(function(el){
-        if (el.name !== client.name) {
-          $scope.clients.push(el);
-        }
-      });
     }
     $scope.save();
   };

@@ -10,11 +10,11 @@
 
     <div class="section">
 
-      <h2 class="banner"><span ng-model="todayJobs.edit" ng-click="todayJobs.edit=!todayJobs.edit">Working on Today, {{date | date:'MM/dd'}}</span> <span ng-show="todayJobs.edit" ng-click="clients.push({name:'New Client',projects:[],today:[]})">+</span></h2>
+      <h2 class="banner"><span ng-click="toggleEdit(todayJobs)">Working on Today, {{date | date:'MM/dd'}}</span> <span ng-show="todayJobs.edit" ng-click="addClient(todayJobs)">+</span></h2>
 
 
 
-      <div class="client" ng-repeat="client in clients">
+      <div class="client" ng-repeat="client in clients track by $index">
 
         <h3>
           <span ng-click="toggleEdit(client.today)">{{client.name}}</span>
@@ -54,9 +54,9 @@
 
     <div class="section">
 
-      <h2 class="banner"><span ng-model="todayJobs.edit" ng-click="hotsheetJobs.edit=!hotsheetJobs.edit">Hotsheet</span> <span ng-show="hotsheetJobs.edit" ng-click="clients.push({name:'New Client',projects:[],today:[]})">+</span></h2>
+      <h2 class="banner"><span ng-click="toggleEdit(hotsheetJobs)">Hotsheet</span> <span ng-show="hotsheetJobs.edit" ng-click="addClient(hotsheetJobs)">+</span></h2>
 
-      <div class="client" ng-repeat="client in clients">
+      <div class="client" ng-repeat="client in clients track by $index">
 
         <h3>
           <span ng-click="toggleEdit(client)">{{client.name}}</span>
