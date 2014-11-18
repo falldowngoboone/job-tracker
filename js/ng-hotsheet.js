@@ -1,11 +1,13 @@
 angular.module('hotsheet',[])
 
-.controller('hotsheetCtrl', ['$scope', '$http', '$window', function($scope, $http, $window){
+.controller('hotsheetCtrl', ['$scope', '$http', '$window', 'dataServices', function($scope, $http, $window, dataServices){
 
   $http.get('/data/test.json')
     .success(function(data){
       $scope.clients = data;
     });
+
+  $scope.testPhrase = dataServices.get();
 
   $scope.save = function() {
     var data = JSON.stringify($scope.clients, null, 2);
@@ -113,4 +115,13 @@ angular.module('hotsheet',[])
     client.meeting.boards.push({board:"New board"});
   };
 
+}])
+
+.factory('dataServices', ['$http', function($http){
+  var dataServices = {};
+  dataServices.get = function() {
+    return 2 + 2;
+  };
+
+  return dataServices;
 }]);

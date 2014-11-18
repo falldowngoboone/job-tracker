@@ -7,7 +7,7 @@
 </head>
 <body>
   <div id="hotsheet" ng-controller="hotsheetCtrl">
-
+    <div>Test: {{testPhrase}}</div>
     <div class="section">
 
       <h2 class="banner"><span ng-click="toggleEdit(todayJobs)">Working on Today, {{date | date:'MM/dd'}}</span> <span ng-show="todayJobs.edit" ng-click="addClient(todayJobs)">+</span></h2>
