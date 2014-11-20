@@ -3,7 +3,7 @@
     var dataServices = {};
 
     dataServices.get = function() {
-      return $http.get('/data/test.json');
+      return $http.get('/data/hs-data.json');
     };
     dataServices.saveJSON = function(clients) {
       this.clients = clients;

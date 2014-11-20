@@ -1,107 +1,112 @@
 (function() {
-  function hotsheetCtrl($scope, $window, dataServices){
+  function hotsheetCtrl($window, dataServices){
+
+    // Resolving in the Controller is bad. This should be handled by
+    // $routeProvider service using resolve.
+    var self = this;
 
     dataServices.get()
-      .success(function(data){
-        $scope.clients = data;
-      });
-    $scope.save = dataServices.saveJSON($scope.clients);
+     .success(function(data){
+       self.clients = data;
+     });
+    this.save = dataServices.saveJSON(this.clients);
 
-    $scope.date = new Date();
 
-    $scope.toggleEdit = function(context) {
+    this.date = new Date();
+
+    this.toggleEdit = function(context) {
       if(context.edit) {
         delete context.edit;
-        $scope.save();
+        this.save();
       } else {
         context.edit = true;
       }
     };
 
-    $scope.todayJobs = function() {
+    this.todayJobs = function() {
       return {edit: false};
     };
 
-    $scope.hotsheetJobs = function() {
+    this.hotsheetJobs = function() {
       return {edit: false};
     };
 
-    $scope.addClient = function(self) {
-      $scope.clients.push({
+    this.addClient = function(self) {
+      this.clients.push({
         name:'New Client',
         projects:[],
         today:[]
       });
-      $scope.toggleEdit(self);
+      this.toggleEdit(self);
     };
-    $scope.deleteClient = function(client) {
+    this.deleteClient = function(client) {
       if ($window.confirm("Delete Client?")) {
-        var clientIndex = $scope.clients.indexOf(client);
-        $scope.clients.splice(clientIndex, 1);
+        var clientIndex = this.clients.indexOf(client);
+        this.clients.splice(clientIndex, 1);
       }
-      $scope.save();
+      this.save();
     };
 
-    $scope.addToday = function(client) {
+    this.addToday = function(client) {
       client.today.unshift({item:'new'});
-      $scope.toggleEdit(client.today);
+      this.toggleEdit(client.today);
     };
-    $scope.deleteToday = function(job, client) {
+    this.deleteToday = function(job, client) {
       if ($window.confirm("Delete Today item?")) {
-        var clientIndex = $scope.clients.indexOf(client);
-        var jobIndex = $scope.clients[clientIndex].today.indexOf(job);
+        var clientIndex = this.clients.indexOf(client);
+        var jobIndex = this.clients[clientIndex].today.indexOf(job);
 
-        $scope.clients[clientIndex].today.splice(jobIndex, 1);
+        this.clients[clientIndex].today.splice(jobIndex, 1);
 
       }
-      $scope.save();
+      this.save();
     };
 
-    $scope.addProject = function(client) {
+    this.addProject = function(client) {
       client.projects.unshift({name:'new'});
-      $scope.toggleEdit(client);
+      this.toggleEdit(client);
     };
-    $scope.deleteProject = function(project, client) {
+    this.deleteProject = function(project, client) {
       if ($window.confirm("Delete Project?")) {
-        var clientIndex = $scope.clients.indexOf(client);
-        var projectIndex = $scope.clients[clientIndex].projects.indexOf(project);
+        var clientIndex = this.clients.indexOf(client);
+        var projectIndex = this.clients[clientIndex].projects.indexOf(project);
 
-        $scope.clients[clientIndex].projects.splice(projectIndex, 1);
+        this.clients[clientIndex].projects.splice(projectIndex, 1);
 
       }
-      $scope.save();
+      this.save();
     };
 
-    $scope.addTask = function(project){
+    this.addTask = function(project){
       if(!project.tasks){
         project.tasks = [];
       }
       project.tasks.unshift({item:'New task'});
     };
-    $scope.deleteTask = function(task, project, client) {
+    this.deleteTask = function(task, project, client) {
       if ($window.confirm("Delete Task?")) {
-        var clientIndex = $scope.clients.indexOf(client);
-        var projectIndex = $scope.clients[clientIndex].projects.indexOf(project);
-        var taskIndex = $scope.clients[clientIndex].projects[projectIndex].tasks.indexOf(task);
+        var clientIndex = this.clients.indexOf(client);
+        var projectIndex = this.clients[clientIndex].projects.indexOf(project);
+        var taskIndex = this.clients[clientIndex].projects[projectIndex].tasks.indexOf(task);
 
-        $scope.clients[clientIndex].projects[projectIndex].tasks.splice(taskIndex, 1);
+        this.clients[clientIndex].projects[projectIndex].tasks.splice(taskIndex, 1);
 
       }
-      $scope.save();
+      this.save();
     };
 
-    $scope.addMeeting = function(client) {
+    this.addMeeting = function(client) {
       if (!client.meeting) {
         client.meeting = {date:"???"};
       }
-      $scope.toggleEdit(client);
+      this.toggleEdit(client);
     };
-    $scope.deleteMeeting = function(client) {
+    this.deleteMeeting = function(client) {
       delete client.meeting;
-      $scope.save();
+      this.save();
     };
 
-    $scope.addBoard = function(client) {
+    this.addBoard = function(client) {
       if (!client.meeting.boards) {
         client.meeting.boards = [];
       }
@@ -111,5 +116,5 @@
   }
 
   angular.module('hotsheet')
-    .controller('hotsheetCtrl', ['$scope', '$window', 'dataServices', hotsheetCtrl]);
+    .controller('hotsheetCtrl', ['$window', 'dataServices', hotsheetCtrl]);
 }());
