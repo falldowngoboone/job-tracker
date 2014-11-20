@@ -1,0 +1,141 @@
+<div id="hotsheet">
+  <div class="section">
+
+    <h2 class="banner"><span ng-click="hotsheet.toggleEdit(hotsheet.todayJobs)">Working on Today, {{hotsheet.date | date:'MM/dd'}}</span> <span ng-show="hotsheet.todayJobs.edit" ng-click="hotsheet.addClient(hotsheet.todayJobs)">+</span></h2>
+
+
+
+    <div class="client" ng-repeat="client in hotsheet.clients track by $index">
+
+      <h3>
+        <span ng-click="hotsheet.toggleEdit(client.today)">{{client.name}}</span>
+
+        <form ng-submit="hotsheet.toggleEdit(client.today)" ng-show="client.today.edit">
+          <input type="text" ng-model="client.name">
+          <span ng-click="hotsheet.addToday(client)">Add New Item</span> |
+          <span ng-click="hotsheet.deleteClient(client)">Delete {{client.name}}</span>
+        </form>
+
+      </h3>
+
+      <ul>
+        <li class="{{today.status}}" ng-repeat-start="today in client.today track by $index">
+          <span ng-click="hotsheet.toggleEdit(today)">{{today.item}}</span>
+        </li>
+
+        <form name="form" ng-submit="hotsheet.toggleEdit(today)" ng-show="today.edit" ng-repeat-end>
+          <input type="text" ng-model="today.item">
+          <select type="text" ng-model="today.status">
+            <option value="normal">normal</option>
+            <option value="need">need</option>
+            <option value="late">late</option>
+            <option value="alert">alert</option>
+          </select>
+          <button type="button" ng-click="hotsheet.deleteToday(today, client)">Delete</button><br>
+          <input type="submit" value="Done">
+
+        </form>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <h2 class="banner"><span ng-click="hotsheet.toggleEdit(hotsheet.hotsheetJobs)">Hotsheet</span> <span ng-show="hotsheet.hotsheetJobs.edit" ng-click="hotsheet.addClient(hotsheet.hotsheetJobs)">+</span></h2>
+
+    <div class="client" ng-repeat="client in hotsheet.clients track by $index">
+
+      <h3>
+        <span ng-click="hotsheet.toggleEdit(client)">{{client.name}}</span>
+        <form ng-submit="hotsheet.toggleEdit(client)" ng-show="client.edit">
+          <input type="text" ng-model="client.name">
+          <span ng-click="hotsheet.addProject(client)">Add New Project</span> |
+          <span ng-click="hotsheet.addMeeting(client)">Add New Meeting</span> |
+          <span ng-click="hotsheet.deleteClient(client)">Delete {{client.name}}</span>
+        </form>
+      </h3>
+      <ul>
+        <li class="{{project.status}}" ng-repeat-start="project in client.projects | orderBy:['-!atv', 'atv'] track by $index" ng-click="hotsheet.toggleEdit(project)" ng-show="!project.edit">
+          {{project.name}} &ndash;
+          <span class="{{task.status}}" ng-repeat="task in project.tasks | orderBy:['-!due', 'due']">
+            {{task.item}}<span ng-show="task.due"> ({{task.due | date:'MM/dd'}})</span><span ng-show="!$last">,</span>
+          </span>
+          <span ng-show="project.atv">(ATV {{project.atv | date:'MM/dd'}})</span>
+          <span class="alert" ng-hide="project.jof">
+            need JOF
+          </span>
+        </li>
+
+        <form name="form" ng-submit="hotsheet.toggleEdit(project)" ng-show="project.edit" ng-repeat-end>
+          <strong ng-click="hotsheet.toggleEdit(project)">{{project.name}}</strong>
+          <button type="button" ng-click="hotsheet.deleteProject(project, client)">Delete Project</button><br>
+          <input type="text" ng-model="project.name">
+          <select type="text" ng-model="project.status">
+            <option value="normal">normal</option>
+            <option value="need">need</option>
+            <option value="late">late</option>
+            <option value="alert">alert</option>
+            <option value="collected">collected</option>
+          </select>
+          <input type="text" ng-model="project.atv" placeholder="YYYY-MM-DD">
+          <input type="checkbox" ng-model="project.jof" id="jof-{{$index}}">
+          <label for="jof-{{$index}}">JOF</label> <br>
+          <strong ng-click="hotsheet.toggleEdit(project)">Tasks:</strong><br>
+          <input type="text" ng-repeat-start="task in project.tasks | orderBy:['-!due', 'due']" ng-model="task.item">
+          <select type="text" ng-model="task.status">
+            <option value="normal">normal</option>
+            <option value="need">need</option>
+            <option value="late">late</option>
+            <option value="alert">alert</option>
+          </select>
+          <input type="text" ng-model="task.due" placeholder="YYYY-MM-DD">
+          <button type="button" ng-click="hotsheet.deleteTask(task, project, client)">Delete Task</button><br ng-repeat-end>
+          <button type="button" ng-click="hotsheet.addTask(project)">Add Task</button> <input type="submit" value="Done">
+        </form>
+
+      </ul>
+
+      <div ng-show="client.meeting" class="meeting">
+        <p class="{{client.meeting.status}}" ng-click="hotsheet.toggleEdit(client.meeting)" ng-show="!client.meeting.edit">
+          Next {{client.name}} Meeting: {{client.meeting.date}}
+          <span class="alert" ng-hide="client.meeting.jof">
+            need JOF
+          </span>
+        </p>
+        <ul ng-show="client.meeting.boards && !client.meeting.edit">
+          <li class="{{board.status}}" ng-repeat="board in client.meeting.boards">
+            {{board.board}}
+          </li>
+        </ul>
+        <form ng-submit="hotsheet.toggleEdit(client.meeting)" ng-show="client.meeting.edit">
+          <label ng-click="hotsheet.toggleEdit(client.meeting)">Next {{client.name}} meeting:</label> <input type="text" ng-model="client.meeting.date" id="meeting-date">
+          <select type="text" ng-model="client.meeting.status">
+            <option value="normal">normal</option>
+            <option value="need">need</option>
+            <option value="late">late</option>
+            <option value="alert">alert</option>
+          </select>
+          <input type="checkbox" ng-model="client.meeting.jof" id="meeting-jof"> <label for="meeting-jof">JOF</label> |
+          <span ng-click="hotsheet.addBoard(client)">Add Board</span> |
+          <span ng-click="hotsheet.deleteMeeting(client)">Delete Meeting</span> <br>
+          <input type="text" ng-repeat-start="board in client.meeting.boards" ng-model="board.board">
+          <select type="text" ng-model="board.status">
+            <option value="normal">normal</option>
+            <option value="need">need</option>
+            <option value="late">late</option>
+            <option value="alert">alert</option>
+          </select> <br ng-repeat-end>
+          <input type="submit" value="Done">
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+  <br><br><br><br><br>
+</div>
