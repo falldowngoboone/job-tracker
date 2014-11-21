@@ -4,7 +4,7 @@
     return {
       restrict: 'E',
       scope: {
-        hsDue: '=due'
+        due: '='
       },
       templateUrl: 'components/hs-date/hs-date.html'
     };
