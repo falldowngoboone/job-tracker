@@ -8,6 +8,6 @@
       });
   }
 
-  angular.module('hotsheet',['ngRoute'])
+  angular.module('hotsheet',['ngRoute', 'hotsheet.hsDate'])
     .config(['$routeProvider', config]);
 }());
