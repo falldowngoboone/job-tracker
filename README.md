@@ -38,6 +38,12 @@ Now all you need to do is double-click this command file to spin up a PHP server
 
 Note: This may or may not work without a data directory. I'll need to run some tests. Please don't yell at me too much. Again, work in progress!
 
-## Final words
+## Future Plans
+
+### AngularJS Seed App
+
+I plan on converting this project to [Angular's seed app](https://github.com/angular/angular-seed). There's a lot of goodness baked into that, including testing and npm install to automatically install dependencies and build out all the files.
+
+## Final Words
 
 If you see something that doesn't make sense, please post an issue. I want to make this the best it can be.
