@@ -2,7 +2,7 @@
   function config($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/views/main.html',
+        templateUrl: '/hotsheet/hotsheet.html',
         controller: 'hotsheetCtrl',
         controllerAs: 'hotsheet'
       });
