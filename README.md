@@ -36,13 +36,17 @@ php -S localhost:8000
 
 Now all you need to do is double-click this command file to spin up a PHP server.
 
-Note: This may or may not work without a data directory. I'll need to run some tests. Please don't yell at me too much. Again, work in progress!
+The first time you edit something, the `scripts/writeJSON.php` should automatically create the `data/` directory to store the hs-data.json file. This is where all of the information is save.
 
 ## Future Plans
 
 ### AngularJS Seed App
 
 I plan on converting this project to [Angular's seed app](https://github.com/angular/angular-seed). There's a lot of goodness baked into that, including testing and npm install to automatically install dependencies and build out all the files.
+
+### RESTful Service
+
+I want to bolt on a RESTful service instead of making a complete file rewrite every single time the data is saved. It's a waste of resources.
 
 ## Final Words
 
