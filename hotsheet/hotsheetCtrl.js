@@ -14,8 +14,6 @@
 
     // This is a fat client. It needs to be cleaned up.
 
-    // Move this to a due-date directive.
-    this.date = new Date();
 
     this.toggleEdit = function(context) {
       if(context.edit) {
