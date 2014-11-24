@@ -62,7 +62,7 @@
         <li class="{{project.status}}" ng-repeat-start="project in client.projects | orderBy:['-!atv', 'atv'] track by $index" ng-click="hotsheet.toggleEdit(project)" ng-show="!project.edit">
           {{project.name}} &ndash;
           <span class="{{task.status}}" ng-repeat="task in project.tasks | orderBy:['-!due', 'due']">
-            {{task.item}}<span ng-show="task.due"> (<hs-date date="{{task.due}}"></hs-date>)</span><span ng-show="!$last">,</span>
+            {{task.item}}<span ng-show="task.due"> <hs-date date="{{task.due}}">(%date%)</hs-date></span><span ng-show="!$last">,</span>
           </span>
           <span ng-show="project.atv">(ATV <hs-date date="{{project.atv}}"></hs-date>)</span>
           <span class="alert" ng-hide="project.jof">
