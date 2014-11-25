@@ -38,15 +38,25 @@
         if (!date) {
           return false;
         } else {
-          var gmtDate = new Date(date),
-              localOffset = today.getTimezoneOffset() * 60 * 1000, // in milliseconds
-              localDate = new Date(gmtDate.getTime() + localOffset);
+          var gmtDate = new Date(date);
 
-          return localDate;
+          if (isNaN(gmtDate.getTime())){
+            return "string";
+          } else {
+            var localOffset = today.getTimezoneOffset() * 60 * 1000, // in milliseconds
+                localDate = new Date(gmtDate.getTime() + localOffset);
+
+            return localDate;
+          }
         }
       };
 
+      // Wrap in function parseDate(val) that parses the date out correctly
+      // Observe changes on the date attribute
+        // then call parseDate(currentVal) on change
+
       var date = localizeDate(attrs.date) || today;
+
 
       // If date is set and less than or equal to today, add late class
       if (attrs.date && date <= today) {
@@ -54,11 +64,17 @@
       }
 
       // Templating with %date%
-      if (!element.text()) {
+      if (!element.text() && date !== "string") {
         element.html(dateFilter(date, format));
       } else {
         // Template out hs-date with %date% placeholder in element text
-        var html = element.html().replace(/(\%date\%)/g, dateFilter(date, format));
+        var replaceText;
+        if (date === "string") {
+          replaceText = attrs.date;
+        } else {
+          replaceText = dateFilter(date, format);
+        }
+        var html = element.html().replace(/(\%date\%)/g, replaceText);
         element.html(html);
       }
 
