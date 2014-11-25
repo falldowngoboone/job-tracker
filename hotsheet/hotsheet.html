@@ -62,9 +62,9 @@
         <li class="{{project.status}}" ng-repeat-start="project in client.projects | orderBy:['-!atv', 'atv'] track by $index" ng-click="hotsheet.toggleEdit(project)" ng-show="!project.edit">
           {{project.name}} &ndash;
           <span class="{{task.status}}" ng-repeat="task in project.tasks | orderBy:['-!due', 'due']">
-            {{task.item}}<hs-date date="{{task.due}}" ng-show="task.due"> (%date%)</hs-date><span ng-show="!$last">,</span>
+            {{task.item}}<span ng-show="task.due"> </span><hs-date date="{{task.due}}" format="(MM/dd)" ng-show="task.due"></hs-date><span ng-show="!$last">,</span>
           </span>
-          <hs-date date="{{project.atv}}" ng-show="project.atv">(ATV %date%)</hs-date>
+          <hs-date date="{{project.atv}}" format="(ATV MM/dd)" ng-show="project.atv"></hs-date>
           <span class="alert" ng-hide="project.jof">
             need JOF
           </span>
