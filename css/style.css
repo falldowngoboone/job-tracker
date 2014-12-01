@@ -1,0 +1,75 @@
+/*------------------------------------*\
+    $TABLE OF CONTENTS
+    based generally on Harry Roberts excellent CSS Guidelines https://github.com/csswizardry/CSS-Guidelines
+\*------------------------------------*/
+/**
+ * VARIABLES..............................Declarations of Sass variables
+ * .....Colors
+ * .....Typography
+ * .....Layout
+ * .....Defaults
+ * .....Breakpoints
+ * MIXINS.................................Sass mixins
+ * RESET..................................Set reset defaults
+ * GLOBAL ELEMENTS........................Establish global styles
+ * .....Global classes
+ * .....Main
+ * .....Links
+ * .....Headings
+ * .....Text-related elements (p, blockquote, lists)
+ * .....Lists
+ * .....Forms
+ * .....Tables
+ * LAYOUT
+ * PAGE STRUCTURE
+ * OBJECT TEXT STYLES
+ * COMPONENTS
+ * .....Statuses
+ */
+/*------------------------------------*\
+    $VARIABLES
+\*------------------------------------*/
+/*------------------------------------*\
+    $GLOBAL ELEMENTS
+\*------------------------------------*/
+body {
+  background: #f0efec;
+  font: 100%/1.4 "Lucida Grande", "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  -webkit-text-size-adjust: 100%;
+  color: #333; }
+
+/*------------------------------------*\
+    $LAYOUT
+\*------------------------------------*/
+/*------------------------------------*\
+    $PAGE STRUCTURE
+\*------------------------------------*/
+/*------------------------------------*\
+    $OBJECT TEXT STYLES
+\*------------------------------------*/
+/*------------------------------------*\
+    $COMPONENTS
+\*------------------------------------*/
+.late,
+.alert {
+  color: #f00; }
+
+.alert,
+.need,
+.done,
+.collected {
+  font-weight: bold; }
+
+.collected {
+  margin-bottom: 2em; }
+
+.banner {
+  color: white;
+  background-color: #205680;
+  padding: 10px; }
+
+.section {
+  margin-bottom: 50px; }
+
+.client {
+  margin-bottom: 35px; }
