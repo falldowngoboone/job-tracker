@@ -67,6 +67,8 @@
         // If date is set and less than or equal to today, add late class
         if (val && date <= today) {
           element.addClass("late");
+        } else {
+          element.removeClass("late");
         }
 
       };
