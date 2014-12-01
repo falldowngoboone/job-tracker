@@ -1,19 +1,26 @@
 (function() {
   function hotsheetCtrl($window, dataServices){
 
-    // Resolving in the Controller is bad. This should be handled by
-    // $routeProvider service using resolve.
+    // TODO: Resolving in the Controller is bad. This should be handled by
+      // $routeProvider service using resolve.
     var self = this;
 
+    // TODO: dataServices implies it's in a file called dataServices. It doesn't
+      // exist. Create a dataServices module, then decorate it in hotsheetServices.
     dataServices.get()
      .success(function(data){
        self.clients = data;
      });
     this.save = dataServices.saveJSON(this.clients);
 
+    // TODO: Separate toggleEdit out into a service. Perhaps change how
+      // it operates to an "edit" event broadcaster/listener?
 
-    // This is a fat client. It needs to be cleaned up.
-
+    // TODO: Separate the objects into services (Client, Project, Job,
+      // Meeting (basically a separate Project type)). This may be a good time
+      // to 86 the Today jobs and go to a Jobs-based system.
+      // Also a good time to transform the Hotsheet module into a strict
+      // email-generation service.
 
     this.toggleEdit = function(context) {
       if(context.edit) {
