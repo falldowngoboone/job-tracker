@@ -1,17 +1,17 @@
 (function() {
-  function hotsheetCtrl($window, dataServices){
+  function hotsheetCtrl($window, hotsheetServices){
 
     // TODO: Resolving in the Controller is bad. This should be handled by
       // $routeProvider service using resolve.
     var self = this;
 
-    // TODO: dataServices implies it's in a file called dataServices. It doesn't
-      // exist. Create a dataServices module, then decorate it in hotsheetServices.
-    dataServices.get()
+    // TODO: hotsheetServices implies it's in a file called hotsheetServices. It doesn't
+      // exist. Create a hotsheetServices module, then decorate it in hotsheetServices.
+    hotsheetServices.get()
      .success(function(data){
        self.clients = data;
      });
-    this.save = dataServices.saveJSON(this.clients);
+    this.save = hotsheetServices.saveJSON(this.clients);
 
     // TODO: Separate toggleEdit out into a service. Perhaps change how
       // it operates to an "edit" event broadcaster/listener?
@@ -124,5 +124,5 @@
   }
 
   angular.module('hotsheet')
-    .controller('hotsheetCtrl', ['$window', 'dataServices', hotsheetCtrl]);
+    .controller('hotsheetCtrl', ['$window', 'hotsheetServices', hotsheetCtrl]);
 }());
