@@ -5,8 +5,6 @@
       // $routeProvider service using resolve.
     var self = this;
 
-    // TODO: hotsheetServices implies it's in a file called hotsheetServices. It doesn't
-      // exist. Create a hotsheetServices module, then decorate it in hotsheetServices.
     hotsheetServices.get()
      .success(function(data){
        self.clients = data;
