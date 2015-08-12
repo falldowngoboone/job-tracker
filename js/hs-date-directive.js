@@ -1,3 +1,12 @@
+/**
+ * hs-date-directive.js
+ *
+ * Ryan Boone
+ * falldowngoboone@gmail.com
+ *
+ * Date component for the hotsheet.
+ */
+
 // hsDate directive
 // Format: <hs-date [date] [format]></hs-date>
 // Attributes:
@@ -43,8 +52,8 @@
           var gmtDate = new Date(date);
 
           if (isNaN(gmtDate.getTime())){
-            console.log("Value " + date + " is not a valid date.");
-            return "string";
+            console.log( 'Value ' + date + ' is not a valid date.' );
+            return 'string';
           } else {
             var localOffset = today.getTimezoneOffset() * 60 * 1000, // in milliseconds
                 localDate = new Date(gmtDate.getTime() + localOffset);
@@ -59,16 +68,16 @@
             date = localizeDate(val) || today,
             format = attrs.format || 'MM/dd';
 
-        if (date === "string") {
+        if (date === 'string') {
           element.text(val);
         } else {
           element.text(dateFilter(date, format));
         }
         // If date is set and less than or equal to today, add late class
         if (val && date <= today) {
-          element.addClass("late");
+          element.addClass('late');
         } else {
-          element.removeClass("late");
+          element.removeClass('late');
         }
 
       };

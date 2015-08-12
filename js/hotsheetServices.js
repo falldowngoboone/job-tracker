@@ -1,3 +1,12 @@
+/**
+ * hotsheetServices.js
+ *
+ * Ryan Boone
+ * falldowngoboone@gmail.com
+ *
+ * Provides data reading and writing services.
+ */
+
 (function(){
   function hotsheetServices($http){
     var hotsheetServices = {};

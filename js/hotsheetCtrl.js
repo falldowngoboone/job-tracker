@@ -1,3 +1,12 @@
+/**
+ * hotsheetCtrl.js
+ *
+ * Ryan Boone
+ * falldowngoboone@gmail.com
+ *
+ * The master hotsheet controller.
+ */
+
 (function() {
   function hotsheetCtrl($window, hotsheetServices){
 

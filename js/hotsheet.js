@@ -1,12 +1,23 @@
+/**
+ * app.js
+ *
+ * Ryan Boone
+ * falldowngoboone@gmail.com
+ *
+ * Initiates the hotsheet app, as well as routing.
+ */
+
 (function() {
-  function config($routeProvider) {
+  var config;
+
+  config = function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/hotsheet/hotsheet.html',
+        templateUrl: '/templates/hotsheet.html',
         controller: 'hotsheetCtrl',
         controllerAs: 'hotsheet'
       });
-  }
+  };
 
   angular.module('hotsheet',['ngRoute', 'hotsheet.hsDate'])
     .config(['$routeProvider', config]);
