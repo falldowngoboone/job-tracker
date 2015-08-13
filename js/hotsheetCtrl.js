@@ -110,24 +110,6 @@
       this.save();
     };
 
-    this.addMeeting = function(client) {
-      if (!client.meeting) {
-        client.meeting = {date:"???"};
-      }
-      this.toggleEdit(client);
-    };
-    this.deleteMeeting = function(client) {
-      delete client.meeting;
-      this.save();
-    };
-
-    this.addBoard = function(client) {
-      if (!client.meeting.boards) {
-        client.meeting.boards = [];
-      }
-      client.meeting.boards.push({board:"New board"});
-    };
-
   }
 
   angular.module('hotsheet')

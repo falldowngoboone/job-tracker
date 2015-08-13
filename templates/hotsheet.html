@@ -54,7 +54,6 @@
         <form ng-submit="hotsheet.toggleEdit(client)" ng-show="client.edit">
           <input type="text" ng-model="client.name">
           <span ng-click="hotsheet.addProject(client)">Add New Project</span> |
-          <span ng-click="hotsheet.addMeeting(client)">Add New Meeting</span> |
           <span ng-click="hotsheet.deleteClient(client)">Delete {{client.name}}</span>
         </form>
       </h3>
@@ -98,42 +97,6 @@
         </form>
 
       </ul>
-
-      <div ng-show="client.meeting" class="meeting">
-        <p class="{{client.meeting.status}}" ng-click="hotsheet.toggleEdit(client.meeting)" ng-show="!client.meeting.edit">
-          Next {{client.name}} Meeting: <hs-date date="{{client.meeting.date}}"></hs-date>
-          <span class="alert" ng-hide="client.meeting.jof">
-            need JOF
-          </span>
-        </p>
-        <ul ng-show="client.meeting.boards && !client.meeting.edit">
-          <li class="{{board.status}}" ng-repeat="board in client.meeting.boards">
-            {{board.board}}
-          </li>
-        </ul>
-        <form ng-submit="hotsheet.toggleEdit(client.meeting)" ng-show="client.meeting.edit">
-          <label ng-click="hotsheet.toggleEdit(client.meeting)">Next {{client.name}} meeting:</label> <input type="text" ng-model="client.meeting.date" id="meeting-date">
-          <select type="text" ng-model="client.meeting.status">
-            <option value="normal">normal</option>
-            <option value="need">need</option>
-            <option value="late">late</option>
-            <option value="alert">alert</option>
-          </select>
-          <input type="checkbox" ng-model="client.meeting.jof" id="meeting-jof"> <label for="meeting-jof">JOF</label> |
-          <span ng-click="hotsheet.addBoard(client)">Add Board</span> |
-          <span ng-click="hotsheet.deleteMeeting(client)">Delete Meeting</span> <br>
-          <input type="text" ng-repeat-start="board in client.meeting.boards" ng-model="board.board">
-          <select type="text" ng-model="board.status">
-            <option value="normal">normal</option>
-            <option value="need">need</option>
-            <option value="late">late</option>
-            <option value="alert">alert</option>
-          </select> <br ng-repeat-end>
-          <input type="submit" value="Done">
-        </form>
-      </div>
-
-    </div>
 
   </div>
 
