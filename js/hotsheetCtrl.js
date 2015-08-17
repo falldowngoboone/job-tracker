@@ -1,3 +1,5 @@
+// $TODO : fold all CRUD functions into hotsheetClients.js
+
 /**
  * hotsheetCtrl.js
  *
@@ -47,6 +49,7 @@
     };
 
     this.addClient = function(self) {
+      this.clients = this.clients || [];
       this.clients.push({
         name:'New Client',
         projects:[],
