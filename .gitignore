@@ -4,3 +4,4 @@ data/**
 RESOURCES/**
 **.sass-cache
 js/min/*
+.DS_Store
