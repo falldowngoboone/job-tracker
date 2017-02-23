@@ -1,7 +1,7 @@
 job-tracker
 ===========
 
-*** Update: If you haven't noticed, this is a severely out-of-date project. I'm working on other stuff. ***
+***Update: If you haven't noticed, this is a severely out-of-date project. I'm working on other stuff.***
 
 This is a tiny little AngularJS project I've been working on to get the hang of Angular. It's an update list based on a multi-client, multi-project work flow. It's horribly primitive, so please forgive the lack of style, function, etc. It's a work in progress.
 
